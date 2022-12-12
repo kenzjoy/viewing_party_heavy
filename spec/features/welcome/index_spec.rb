@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'welcome landing page', type: :feature do
   before(:each) do
-    @kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com')
-    @astrid = User.create!(name: 'Astrid', email: 'astrid_mail@gmail.com')
-    @reba = User.create!(name: 'Reba', email: 'reba_mail@gmail.com')
+    @kenz = create(:user, name: 'Kenz', email: 'kenz_mail@gmail.com')
+    @astrid = create(:user, name: 'Astrid', email: 'astrid_mail@gmail.com')
+    @reba = create(:user, name: 'Reba', email: 'reba_mail@gmail.com')
+
     visit root_path
   end
 
@@ -16,7 +17,7 @@ RSpec.describe 'welcome landing page', type: :feature do
 
       it '- has a button to create a new user' do
         expect(page).to have_button('Create a New User')
-        
+
         click_button 'Create a New User'
 
         expect(current_path).to eq(new_user_path)

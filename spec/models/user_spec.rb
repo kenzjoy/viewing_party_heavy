@@ -5,6 +5,7 @@ RSpec.describe User, :vcr, type: :model do
     it { should validate_presence_of :email }
     it { should validate_uniqueness_of :email }
     it { should validate_presence_of :name }
+    it { should validate_presence_of :password }
   end
 
   describe 'relationships' do
@@ -24,11 +25,11 @@ RSpec.describe User, :vcr, type: :model do
           party2 = create(:party, movie_id: 56)
           party3 = create(:party, movie_id: 56)
 
-          user_party1 = create(:user_party, user: user1, party: party1)
-          user_party2 = create(:user_party, user: user1, party: party2)
-          user_party3 = create(:user_party, user: user1, party: party3)
-          user_party4 = create(:user_party, user: user2, party: party2)
-          user_party5 = create(:user_party, user: user2, party: party3)
+          _user_party1 = create(:user_party, user: user1, party: party1)
+          _user_party2 = create(:user_party, user: user1, party: party2)
+          _user_party3 = create(:user_party, user: user1, party: party3)
+          _user_party4 = create(:user_party, user: user2, party: party2)
+          _user_party5 = create(:user_party, user: user2, party: party3)
 
           expect(user1.movie_cards_info).to be_a Hash
           expect(user1.movie_cards_info.keys).to eq([party1.id, party2.id, party3.id])
@@ -38,7 +39,7 @@ RSpec.describe User, :vcr, type: :model do
           expect(user1.movie_cards_info.values[1].id).to eq(user1.movie_cards_info.values[2].id) # Checks parties w matching movies dont get erased
 
           expect(user2.movie_cards_info.count).to eq(2)
-          
+
           expect(user3.movie_cards_info).to eq({})
         end
       end
