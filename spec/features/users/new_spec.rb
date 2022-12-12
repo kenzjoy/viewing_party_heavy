@@ -65,7 +65,7 @@ RSpec.describe 'User Registration Page' do
       end
 
       it 'given a duplicate E-mail' do
-        astrid = create(:user, name: 'Astrid', email: 'astrid-mail@gmail.com')
+        _astrid = create(:user, name: 'Astrid', email: 'astrid-mail@gmail.com')
         fill_in :user_name, with: 'Astrid_2'
         fill_in :user_email, with: 'Astrid-mail@gmail.com'
         password = Faker::Alphanumeric.alphanumeric(number: 10)
