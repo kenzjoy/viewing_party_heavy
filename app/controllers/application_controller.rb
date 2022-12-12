@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_user, except: [:landing]
+  before_action :set_user, except: [:landing, :login_user, :login_form]
 
   private
   def error_message(errors)

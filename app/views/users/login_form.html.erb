@@ -1,0 +1,11 @@
+<%=content_for :subtitle do%>
+  <h3>User Login</h3>
+<%end%>
+
+<%= form_with url: '/users/login', method: :post, local: true do |form| %>
+  <%= form.label :email, "E-mail:" %>
+  <%= form.text_field :email %>
+  <%= form.label :password, "Password:" %>
+  <%= form.text_field :password %>
+  <%= form.submit "Log In" %>
+<% end %>
