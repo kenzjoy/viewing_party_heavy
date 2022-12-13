@@ -31,6 +31,10 @@ RSpec.describe 'welcome landing page', type: :feature do
       it '- has a link to go back to the landing page (this link will be present at the top of all pages)' do
         expect(page).to have_link('Home', href: root_path)
       end
+
+      it '- has a link to log in that directs me to login_path' do
+        expect(page).to have_link('Log In', href: login_path)
+      end
     end
   end
 end
