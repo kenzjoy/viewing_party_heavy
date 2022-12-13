@@ -13,7 +13,7 @@ RSpec.describe 'new viewing party page', :vcr, type: :feature do
           expect { click_on 'Create Party' }.to change { Party.count }.by(1)
           party = Party.first
   
-          expect(party.duration).to eq(220)
+          expect(party.duration).to eq(139)
           expect(party.date).to eq(Date.today)
           expect(party.movie_id).to eq(550)
         end

@@ -1,0 +1,18 @@
+<%=content_for :subtitle do%>
+  <h3> Existing User Login </h3>
+<% end %>
+
+<section id= "login_form">
+
+<%= form_with url: login_path, method: :post, local: true do |f| %>
+  <%= f.label 'E-mail' %>
+  <%= f.email_field :email %>
+  <br>
+  <%= f.label :password, 'Password' %>
+  <%= f.password_field :password %>
+  <br>
+  <br>
+  <%= f.submit "Submit" %>
+<% end %>
+
+</section>

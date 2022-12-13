@@ -1,6 +1,6 @@
 <%=content_for :subtitle do%>
   <h3> New User Registration </h3>
-<%end%>
+<% end %>
 
 <section id= "registration_form">
 
@@ -8,8 +8,14 @@
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
-  <%= f.label 'E-mail'%>
+  <%= f.label 'E-mail' %>
   <%= f.email_field :email %>
+  <br>
+  <%= f.label :password, 'Password' %>
+  <%= f.password_field :password %>
+  <br>
+  <%= f.label :password_confirmation, 'Password Confirmation' %>
+  <%= f.password_field :password_confirmation %>
   <br>
   <br>
   <%= f.submit "Register" %>

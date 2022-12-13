@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'welcome landing page', type: :feature do
   before(:each) do
-    @kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com')
-    @astrid = User.create!(name: 'Astrid', email: 'astrid_mail@gmail.com')
-    @reba = User.create!(name: 'Reba', email: 'reba_mail@gmail.com')
+    @kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com', password: 'test', password_confirmation: 'test')
+    @astrid = User.create!(name: 'Astrid', email: 'astrid_mail@gmail.com', password: 'testing', password_confirmation: 'testing')
+    @reba = User.create!(name: 'Reba', email: 'reba_mail@gmail.com', password: 'testing123', password_confirmation: 'testing123')
     visit root_path
   end
 
@@ -30,6 +30,10 @@ RSpec.describe 'welcome landing page', type: :feature do
 
       it '- has a link to go back to the landing page (this link will be present at the top of all pages)' do
         expect(page).to have_link('Home', href: root_path)
+      end
+
+      it '- has a link to log in that directs me to login_path' do
+        expect(page).to have_link('Log In', href: login_path)
       end
     end
   end

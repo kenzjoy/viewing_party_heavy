@@ -31,5 +31,14 @@ RSpec.describe 'application layout', :vcr do
         end
       end
     end
+
+    it '- has a link to log in that directs me to login_path' do
+      routes.each do |path|
+        visit path
+        within '#nav' do
+          expect(page).to have_link('Log In', href: '/login')
+        end
+      end
+    end
   end
 end

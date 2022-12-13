@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/users', to: 'welcome#landing'
   get '/register', to: 'users#new', as: 'new_user'
+  get '/login', to: 'users#login_form'
+  post '/login', to: 'users#login_user'
   get '/users/:id/discover', to: 'users#discover', as: 'discover'
   get '/users/:user_id/movies/:movie_id/viewing_party/new', to: 'parties#new', as: 'new_viewing_party'
   post '/users/:user_id/movies/:movie_id/viewing_party/create', to: 'parties#create'
