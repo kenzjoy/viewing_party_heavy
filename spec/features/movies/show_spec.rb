@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'movie detail page', :vcr, type: :feature do
   before(:each) do
-    @kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com')
-    @astrid = User.create!(name: 'Astrid', email: 'astrid_mail@gmail.com')
-    @reba = User.create!(name: 'Reba', email: 'reba_mail@gmail.com')
+    @kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com', password: 'test', password_confirmation: 'test')
+    @astrid = User.create!(name: 'Astrid', email: 'astrid_mail@gmail.com', password: 'testing', password_confirmation: 'testing')
+    @reba = User.create!(name: 'Reba', email: 'reba_mail@gmail.com', password: 'testing123', password_confirmation: 'testing123')
 
     @party_1 = Party.create!(movie_id: 550, duration: 170, date: Date.new(2022,12,20), start_time: DateTime.new(2022,12,20,18,30,00))
     @party_2 = Party.create!(movie_id: 700, duration: 160, date: Date.new(2022,12,27), start_time: DateTime.new(2022,12,27,20,00,00))
@@ -45,7 +45,7 @@ RSpec.describe 'movie detail page', :vcr, type: :feature do
       end
 
       it '- shows the vote average of the movie' do
-        expect(page).to have_content("Vote Average: 8.428")
+        expect(page).to have_content("Vote Average: 8.429")
       end
 
       it '- shows the runtime in hours & minutes' do

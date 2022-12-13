@@ -104,7 +104,7 @@ a:active {
     background: rgb(36, 35, 41);
 }
 
-input[type=text], select {
+input, select {
   background-color: rgb(50, 50, 51);
   color: rgb(203, 203, 203);
   padding: 12px 20px;
