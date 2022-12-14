@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_user
   before_action :set_user, except: [:landing]
 
   private
@@ -12,5 +13,9 @@ class ApplicationController < ActionController::Base
     elsif params[:id].present?
       @user = User.find(params[:id])
     end
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 end

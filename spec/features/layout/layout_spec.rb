@@ -22,6 +22,7 @@ RSpec.describe 'application layout', :vcr do
            end
          end
   end
+
   describe 'header content' do
     it 'has a link "Home" back to landing page' do
       routes.each do |path|
@@ -32,13 +33,24 @@ RSpec.describe 'application layout', :vcr do
       end
     end
 
-    it '- has a link to log in that directs me to login_path' do
-      routes.each do |path|
-        visit path
-        within '#nav' do
-          expect(page).to have_link('Log In', href: '/login')
-        end
-      end
-    end
+    # it '- as a non-logged in user, there is a Log In link that directs me to login_path' do
+    #   visit root_path
+    #   visit login_path
+    #   visit new_user_path 
+    #   # routes.each do |path|
+    #   #   visit path
+    #     within '#nav' do
+    #       expect(page).to have_link('Log In', href: '/login')
+    #     end
+    #   # end
+    # end
+
+    # it '- as a logged in user, there is a Log Out link that logs me out and directs back to root_path' do 
+    #   visit 
+
+    #   within '#nav' do
+    #     expect(page).to have_link('Log Out', href: '/')
+    #   end
+    # end
   end
 end

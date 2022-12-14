@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates_presence_of :email
+  validates_presence_of :email, case_sensitive: false
   validates_uniqueness_of :email
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
   validates_presence_of :name
