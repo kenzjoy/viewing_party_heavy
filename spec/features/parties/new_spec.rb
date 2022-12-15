@@ -53,8 +53,17 @@ RSpec.describe 'new viewing party page', :vcr, type: :feature do
           guest_1 = create(:user, id: 51, name: "Julian", email: "julian@sunnyvale.ca")
           guest_2 = create(:user, id: 53, name: "Jim Lahey", email: "supervisor@sunnyvale.ca")
           guest_3 = create(:user, id: 54, name: "Ricky", email: "ricky@sunnyvale.ca")
-          visit "/users/#{host.id}/movies/550/viewing_party/new"
+
+          visit login_path
+
+          fill_in :email, with: host.email
+          fill_in :password, with: host.password
+          click_on 'Submit'
+
+          expect(current_path).to eq(user_path(host))
           
+          visit new_viewing_party_path(host.id, 550)
+
           fill_in "Day", with: Date.today
           fill_in "Start Time", with: Time.now
         

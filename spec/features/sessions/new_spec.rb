@@ -37,6 +37,18 @@ RSpec.describe 'login form page' do
         expect(current_path).to eq(login_path)
         expect(page).to have_content("Incorrect Credentials")
       end
+
+      it '- email log in is case insensitive' do
+        kenz = User.create!(name: 'Kenz', email: 'kenz_mail@gmail.com', password: 'test', password_confirmation: 'test')
+
+        fill_in :email, with: 'KENZ_mail@gmail.com'
+        fill_in :password, with: 'test'
+        
+        click_on 'Submit'
+
+        expect(current_path).to eq(user_path(kenz))
+        expect(page).to have_content("Welcome, Kenz!")
+      end
     end
   end
 end

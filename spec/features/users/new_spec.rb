@@ -55,6 +55,7 @@ RSpec.describe 'User Registration Page' do
         fill_in 'name', with: 'Astrid_2'
         fill_in 'email', with: 'Astrid-mail@gmail.com'
         fill_in 'password', with: 'test'
+        fill_in 'password_confirmation', with: 'test'
 
         expect { click_on 'Register' }.to change { User.count }.by(0)
         expect(page).to have_content('Email has already been taken')

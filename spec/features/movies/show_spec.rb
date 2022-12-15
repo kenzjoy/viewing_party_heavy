@@ -19,6 +19,11 @@ RSpec.describe 'movie detail page', :vcr, type: :feature do
     @movie_credits = MovieService.movie_credits(550)
     @movie = Movie.new(@movie_details, @movie_reviews, @movie_credits)
 
+    visit login_path
+    fill_in :email, with: @reba.email
+    fill_in :password, with: @reba.password
+    click_on 'Submit'
+    
     visit user_movie_path(@reba, @movie.id)
   end
 
@@ -67,7 +72,7 @@ RSpec.describe 'movie detail page', :vcr, type: :feature do
       end
 
       it '- shows the count of total reviews' do 
-        expect(page).to have_content("Total Reviews: 7")
+        expect(page).to have_content("Total Reviews: 8")
       end
 
       it '- shows each reviews author and information' do
@@ -75,6 +80,18 @@ RSpec.describe 'movie detail page', :vcr, type: :feature do
         expect(page).to have_content("Author: Goddard")
         expect(page).to have_content("Review: Pretty awesome movie. It shows what one crazy person can convince other crazy people to do. Everyone needs something to believe in. I recommend Jesus Christ, but they want Tyler Durden.")
       end
+
+      it '- only allows logged in users to create a viewing party' do
+        click_on 'Log Out'
+
+        visit user_movie_path(@reba, @movie.id)
+
+        click_button 'Create Viewing Party for Fight Club'
+
+        expect(current_path).to_not eq(user_movie_path(@reba, @movie.id))
+        expect(page).to have_content('You must log in to create a viewing party')
+      end
+
     end
   end
 end
