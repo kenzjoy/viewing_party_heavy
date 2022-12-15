@@ -14,8 +14,10 @@ RSpec.describe 'user show page', :vcr, type: :feature do
   let!(:user_party_1) {create(:user_party, user: reba, party: party_2)}
 
   before(:each) do
-    visit user_path(reba)
-
+    visit login_path
+    fill_in :email, with: reba.email
+    fill_in :password, with: reba.password
+    click_on 'Submit'
   end
 
   describe 'as a user' do 
@@ -40,6 +42,15 @@ RSpec.describe 'user show page', :vcr, type: :feature do
           expect(page).to have_content("December 27, 2022")
           expect(page).to have_content("8:00 pm")
         end
+      end
+
+      it '- only allows access to logged in users' do
+        click_on 'Log Out'
+
+        visit user_path(kenz)
+        
+        expect(current_path).to eq(root_path)
+        expect(page).to have_content("You must log in to view your dashboard")
       end
     end
   end

@@ -1,6 +1,8 @@
 require_relative '../facades/movie_facade'
 
 class UsersController < ApplicationController
+  before_action :validate_user, only: :show
+
   def new
   end
 
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    session[:user_id] = @user.id
     @user_parties = @user.user_parties
     @parties_info = @user.movie_cards_info
   end
@@ -30,4 +33,10 @@ class UsersController < ApplicationController
     params.permit(:name, :email, :password, :password_confirmation)
   end
 
+  def validate_user
+    if session[:user_id].nil?
+       redirect_to root_path
+       flash[:alert] = 'You must log in to view your dashboard'
+    end
+  end
 end
